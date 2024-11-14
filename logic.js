@@ -4,14 +4,33 @@ const op2 = "Paper";
 const op3 = "Scissors";
 
 //Create function to get a random from 0 to 2, and then through an if get rock, paper, scissor options
-function getComputerChoice(max = 3){
-    let result = Math.floor(Math.random() * max);
+function getComputerChoice(limit){
+    let result = Math.floor(Math.random() * limit);
 
     if(result === 0){
-        console.log(op1);
+        return op1;
     } else if(result === 1){
-        console.log(op2);
+        return op2;
     } else {
-        console.log(op3);
+        return op3;
     }
 }
+
+let value = getComputerChoice(3);
+console.log(value);
+
+
+//Create function to get human choice with an input
+
+function getHumanChoice (input){
+    if(input === "Rock"){
+        return op1;
+    } else if (input === "Paper") {
+        return op2;
+    } else if (input === "Scissors") {
+        return op3;
+    }
+}
+
+let option = getHumanChoice(prompt("Enter your option:"));
+console.log(option);
