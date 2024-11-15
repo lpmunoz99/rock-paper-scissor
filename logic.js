@@ -6,7 +6,7 @@ let humanScore = 0;
 let computerScore = 0;
 
 //Create function to get a random from 0 to 2, and then through an if get rock, paper, scissor options
-function getComputerChoice(limit){
+function getComputerChoice(limit = 3){
     let result = Math.floor(Math.random() * limit);
 
     if(result === 0){
@@ -33,7 +33,7 @@ function getHumanChoice (input){
     }
 }
 
-//Create function to calculate winner between user option and computer option, grabbing getHumanChoice and getComputerChoice as arguments
+//Create function to calculate winner between user option and computer option each round, grabbing getHumanChoice and getComputerChoice as arguments
 
 function playRound(humanChoice, computerChoice) {
     if (humanChoice === "rock" && computerChoice === op2){
@@ -63,16 +63,30 @@ function playRound(humanChoice, computerChoice) {
     } else {
         console.log("Enter a valid option");
     }
+
+    console.log(computerScore);
+    console.log(humanScore);
 }
+
+//Create function to calculate winner between user option and computer option in the game, using playRound and variables for computer and user options.
 
 function playGame(){
+    humanScore = 0;
+    computerScore = 0;
 
+    for (i = 0; i < 5; i++){
+        let humanSelection = getHumanChoice(prompt("Enter Rock, Paper or Scissors:").toLowerCase());
+        let computerSelection = getComputerChoice();
+        playRound(humanSelection, computerSelection);
+    }
+
+    if(computerScore > humanScore) {
+        console.log("Computer Wins! Better luck next time!");
+    } else if (humanScore > computerScore) {
+        console.log("You Won! Congrats!");
+    } else {
+        console.log("It's a Draw, same amount of points!");
+    }
 }
-
-let humanSelection = getHumanChoice(prompt("Enter Rock, Paper or Scissors:").toLowerCase());
-let computerSelection = getComputerChoice(3);
-
-
-console.log(humanSelection);
-console.log(computerSelection);
-playRound(humanSelection, computerSelection);
+    
+playGame();
