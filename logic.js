@@ -65,7 +65,11 @@ function playRound(humanChoice, computerChoice) {
     }
 }
 
-let humanSelection = getHumanChoice(prompt("Enter your option:").toLowerCase());
+function playGame(){
+
+}
+
+let humanSelection = getHumanChoice(prompt("Enter Rock, Paper or Scissors:").toLowerCase());
 let computerSelection = getComputerChoice(3);
 
 
