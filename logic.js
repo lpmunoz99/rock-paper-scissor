@@ -18,55 +18,67 @@ function getComputerChoice(limit = 3){
     }
 }
 
-
-//Create function to get human choice with an input
-
-function getHumanChoice (input){
-    if(input === "rock"){
-        return op1;
-    } else if (input === "paper") {
-        return op2;
-    } else if (input === "scissors") {
-        return op3;
-    } else {
-        return "invalid option";
-    }
-}
-
 //Create function to calculate winner between user option and computer option each round, grabbing getHumanChoice and getComputerChoice as arguments
 
 function playRound(humanChoice, computerChoice) {
+
+
     if (humanChoice === "rock" && computerChoice === op2){
-        console.log("You Lose! Paper beats Rock.");
         computerScore++;
+        paraResult.textContent = "You Lose! Paper beats Rock.";
+        paraScores.textContent = "Your Score:" + humanScore + "\nComputer Score:" + computerScore;
     } else if (humanChoice === "rock" && computerChoice === op3){
-        console.log("You Win! Rock beats Scissors.");
         humanScore++;
+        paraResult.textContent = "You Win! Rock beats Scissors.";
+        paraScores.textContent = "Your Score:" + humanScore + "\nComputer Score:" + computerScore;
     } else if (humanChoice === "rock" && computerChoice === op1){
-        console.log("It's a draw!");
+        paraResult.textContent = "It's a draw!";
+        paraScores.textContent = "Your Score:" + humanScore + "\nComputer Score:" + computerScore;
     } else if (humanChoice === "paper" && computerChoice === op1){
-        console.log("You Win! Paper beats Rock.");
         humanScore++;
+        paraResult.textContent = "You Win! Paper beats Rock.";
+        paraScores.textContent = "Your Score:" + humanScore + "\nComputer Score:" + computerScore;
     } else if (humanChoice === "paper" && computerChoice === op2){
-        console.log("It's a Draw!");
+        paraResult.textContent = "It's a Draw!";
+        paraScores.textContent = "Your Score:" + humanScore + "\nComputer Score:" + computerScore;
     } else if (humanChoice === "paper" && computerChoice === op3){
-        console.log("You Lose! Scissors beats paper.");
         computerScore++;
+        paraResult.textContent = "You Lose! Scissors beats paper.";
+        paraScores.textContent = "Your Score:" + humanScore + "\nComputer Score:" + computerScore;
     } else if (humanChoice === "scissors" && computerChoice === op1){
-        console.log("You Lose! Rock beats Scissors.");
         computerScore++;
+        paraResult.textContent = "You Lose! Rock beats Scissors.";
+        paraScores.textContent = "Your Score:" + humanScore + "\nComputer Score:" + computerScore;
     } else if (humanChoice === "scissors" && computerChoice === op2){
-        console.log("You Win! Scissors beats Paper.");
         humanScore++;
+        paraResult.textContent = "You Win! Scissors beats Paper.";
+        paraScores.textContent = "Your Score:" + humanScore + "\nComputer Score:" + computerScore;
     } else if (humanChoice === "scissors" && computerChoice === op3){
-        console.log("It's a Draw!");
+        paraResult.textContent = "It's a Draw!";
+        paraScores.textContent = "Your Score:" + humanScore + "\nComputer Score:" + computerScore;
     } else {
-        console.log("Enter a valid option");
+        paraResult.textContent = "Enter a valid option";
     }
 
-    console.log(computerScore);
-    console.log(humanScore);
+    if (humanScore === 5){
+        paraWinner.textContent = "You Win! Congratulations!";
+        paraScores.textContent = "Your Score:" + humanScore + "\nComputer Score:" + computerScore;
+        humanScore = 0;
+        computerScore = 0;
+        paraResult.textContent = "";
+        
+    } else if (computerScore === 5) {
+        paraWinner.textContent = "Computer Wins! Better luck next time";
+        paraScores.textContent = "Your Score:" + humanScore + "\nComputer Score:" + computerScore;
+        humanScore = 0;
+        computerScore = 0;
+        paraResult.textContent = "";
+    } else {
+        paraWinner.textContent = "";
+    }
 }
+
+/*
 
 //Create function to calculate winner between user option and computer option in the game, using playRound and variables for computer and user options.
 
@@ -90,3 +102,37 @@ function playGame(){
 }
     
 playGame();
+
+*/
+
+const buttons = document.querySelectorAll("button");
+buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+        switch(button.id){
+            case "btnRock":
+            	playRound("rock", getComputerChoice());
+                break;
+            case "btnPaper":
+                playRound("paper", getComputerChoice());
+                break;
+            case "btnScissors":
+                playRound("scissors", getComputerChoice());
+                break;
+            default:
+        }
+    });
+});
+
+const bod = document.querySelector("body");
+const resultContainer = document.createElement("div");
+resultContainer.classList.add("Container2");
+bod.appendChild(resultContainer);
+const paraResult = document.createElement("p");
+paraResult.classList.add("Result");
+resultContainer.appendChild(paraResult);
+const paraWinner = document.createElement("p");
+paraWinner.classList.add("Winner");
+resultContainer.appendChild(paraWinner);
+const paraScores = document.createElement("p");
+paraScores.classList.add("Scores");
+resultContainer.appendChild(paraScores);
